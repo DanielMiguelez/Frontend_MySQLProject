@@ -1,0 +1,21 @@
+.headerContent{
+    display: flex;
+    background-color: antiquewhite;
+    padding: 10px;
+    justify-content: space-around;
+}
+
+a{
+    all:unset;
+    gap:5vh;
+    font-size: larger;
+    background-color: rgb(78, 78, 150);
+    padding: 10px;
+    border-radius: 10px;
+    color: wheat;
+}
+
+a:hover{
+    background-color: rgb(61, 61, 86);
+    color: yellow;
+}
