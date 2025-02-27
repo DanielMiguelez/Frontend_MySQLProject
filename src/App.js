@@ -9,6 +9,7 @@ import { ProductsProvider } from './context/ProductContext/ProductState';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { UserProvider } from './context/UserContext/UserState';
 import Cart from './components/Cart/Cart';
+import { OrderProvider } from './context/OrderContext/OrderState';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <BrowserRouter>
         <UserProvider>
           <ProductsProvider>
+            <OrderProvider>
             <Header />
             <Routes>
               <Route path="/" element={<Home />} />
@@ -25,6 +27,7 @@ function App() {
               <Route path="/logout" element={<Logout />} />
               <Route path="/cart" element={<Cart />} />
             </Routes>
+            </OrderProvider>
           </ProductsProvider>
         </UserProvider>
       </BrowserRouter>

@@ -1,31 +1,44 @@
-import React, { useContext } from 'react'
-import { ProductContext } from '../../context/ProductContext/ProductState'
-
-import { Divider, List} from 'antd';
-
+import React, { useContext, useEffect } from 'react';
+import { ProductContext } from '../../context/ProductContext/ProductState';
+import { Divider, List, Button } from 'antd';
+import { OrderContext } from '../../context/OrderContext/OrderState';
 
 const Cart = () => {
+    const { cart, clearCart } = useContext(ProductContext); // Obtener el carrito
+    const { createOrder } = useContext(OrderContext); // Obtener la función de crear orden
 
-  const {cart} = useContext(ProductContext)
+    // Función para crear una nueva orden
+    const createNewOrder = () => {
+        createOrder(cart); // Pasa todo el carrito
+        clearCart(); // Limpiar el carrito
+    }
 
-  cart.map(cartItem => cartItem.name)
+    useEffect(() => {
+        localStorage.setItem("cart", JSON.stringify(cart));
+    }, [cart]);
 
-  return (
-    <div> 
-      <Divider>Your Cart</Divider>
+    if (cart.length <= 0) {
+        return <span>No tienes ningún producto añadido</span>;
+    }
 
-      <h2>Products selected</h2> 
-      <List
-          bordered
-          dataSource={cart}
-          renderItem={cartItem => (
-              <List.Item>
-                  {cartItem.name}
-              </List.Item>
-          )}
-      />
-      </div>
-  )
-}
+    return (
+        <div>
+            <Divider>Your Cart</Divider>
 
-export default Cart
+            <h2>Products selected</h2>
+            <List
+                bordered
+                dataSource={cart}
+                renderItem={cartItem => (
+                    <List.Item>
+                        {cartItem.name}
+                    </List.Item>
+                )}
+            />
+            <Button onClick={() => clearCart()} type="primary">Clear Cart</Button>
+            <Button onClick={() => createNewOrder()} type="primary">Order</Button>
+        </div>
+    );
+};
+
+export default Cart;

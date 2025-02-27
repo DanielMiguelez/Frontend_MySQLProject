@@ -5,7 +5,7 @@ import axios from 'axios'
 
 const API_URL = "http://localhost:8000"
 
- const cart = JSON.parse(localStorage.getItem("cart"))
+const cart = JSON.parse(localStorage.getItem("cart"))
 
 const initialState = {
     products:[],
@@ -42,6 +42,12 @@ export const ProductsProvider = ({children}) =>{
         })
     }
 
+    const clearCart = () =>{
+        dispatch({
+            type:"CLEAR_CART",
+        })
+    }
+
     return (
         <ProductContext.Provider
             value={{
@@ -49,7 +55,8 @@ export const ProductsProvider = ({children}) =>{
                 cart:state.cart,
                 getProducts,
                 deleteProduct,
-                addCart
+                addCart,
+                clearCart
             }}
         >
 

@@ -32,7 +32,7 @@ const Products = () => {
                 Precio : {product.price}
               </span>
               <br /><br />
-              <Button type="primary" onClick={()=> deleteProduct(product.id)}>Eliminar </Button>
+              {/* <Button type="primary" onClick={()=> deleteProduct(product.id)}>Eliminar </Button> */}
               <Button type="primary" onClick={()=> addCart(product)}><PlusCircleFilled />  Añadir </Button>
               
               </Card>

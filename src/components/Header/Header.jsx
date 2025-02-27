@@ -3,9 +3,12 @@ import { Link, useNavigate } from 'react-router-dom'
 import './Header.css'
 import { UserContext } from '../../context/UserContext/UserState'
 import { ShoppingCartOutlined, HomeOutlined, ShopOutlined, LogoutOutlined, AndroidOutlined, RiseOutlined } from "@ant-design/icons";
+import { Badge, Avatar} from 'antd';
+import { ProductContext } from '../../context/ProductContext/ProductState';
 
 const Header = () => {
   const { token, logout } = useContext(UserContext)
+  const {cart} = useContext(ProductContext)
   const navigate = useNavigate();
 
   const logoutUser = () => {
@@ -20,7 +23,9 @@ const Header = () => {
           <>
             <Link to="/profile"> <AndroidOutlined />  Profile</Link>
             <Link to="/products"> <ShopOutlined /> Products</Link>
-            <Link to="/cart"><ShoppingCartOutlined />  Cart</Link>
+            <Link to="/cart"><ShoppingCartOutlined />  <Badge size="small" count={cart.length}>
+
+    </Badge>      Cart</Link>
             <Link to="/logout" onClick={()=>logoutUser()}> <LogoutOutlined /> Logout</Link>
           </>
         ) : (
